@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask cache
+instance/
+*.db
+*.sqlite3
+
+# Environment
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Docker
+*.pid
+*.tar
+*.log
+*.sock
+docker-compose.override.yml
+
+# VSCode / JetBrains IDEs
+.vscode/
+.idea/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Python packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Static/media
+static/images/
+!static/images/.gitkeep
