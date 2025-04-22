@@ -2,19 +2,83 @@
 <html>
 <head>
     <title>Image Gallery</title>
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .gallery img {
+            max-width: 300px;
+            max-height: 300px;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .gallery img.enlarged {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: 90%;
+            max-width: 90%;
+            transform: translate(-50%, -50%) scale(1.5);
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <h1>Image Gallery</h1>
-    {% for image in images %}
-        <div>
-            <p>{{ image }}</p>
-            <img src="{{ url_for('image', filename=image) }}" onclick="toggleGrow(this)">
-        </div>
-    {% endfor %}
+    <div class="gallery">
+        {% for image in images %}
+            <img src="{{ url_for('image', filename=image) }}" alt="{{ image }}" onclick="enlarge(this)">
+        {% endfor %}
+    </div>
+
+    <div class="overlay" onclick="shrink()"></div>
+
     <script>
-        function toggleGrow(img) {
-            img.classList.toggle('grow');
+        let currentImg = null;
+
+        function enlarge(img) {
+            if (currentImg) {
+                currentImg.classList.remove('enlarged');
+                document.querySelector('.overlay').classList.remove('active');
+                currentImg = null;
+            } else {
+                img.classList.add('enlarged');
+                document.querySelector('.overlay').classList.add('active');
+                currentImg = img;
+            }
+        }
+
+        function shrink() {
+            if (currentImg) {
+                currentImg.classList.remove('enlarged');
+                document.querySelector('.overlay').classList.remove('active');
+                currentImg = null;
+            }
         }
     </script>
 </body>
