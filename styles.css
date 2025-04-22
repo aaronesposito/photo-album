@@ -1,0 +1,10 @@
+img {
+    max-width: 300px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+img.grow {
+    transform: scale(1.5);
+    z-index: 999;
+}
