@@ -46,7 +46,7 @@ pipeline {
                     docker stop ${CONTAINER_NAME} || true
                     docker rm ${CONTAINER_NAME} || true
                     docker pull ${APP_NAME}:${BUILD_NUMBER}
-                    docker run -p 5010:5000 --name ${CONTAINER_NAME} ${APP_NAME}:${BUILD_NUMBER}
+                    docker run -d -p 5010:5000 -v "D:/lucas-images:/app/static/images" --name ${CONTAINER_NAME} ${APP_NAME}:${BUILD_NUMBER}
                     """
                 }
             }
