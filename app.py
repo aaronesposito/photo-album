@@ -4,9 +4,6 @@ import os
 app = Flask(__name__)
 IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.arw'}
 
-image_folder = os.path.join('Z:\\', 'lucas-images')
-images = [f for f in os.listdir(image_folder) if os.path.splitext(f)[1].lower() in IMAGE_EXTENSIONS]
-
 
 @app.route('/')
 def index():
@@ -14,7 +11,8 @@ def index():
 
 @app.route('/album/<int:page>')
 def pagination(page):
-    # image_folder = os.path.join('static', 'images')
+    image_folder = os.path.join('static', 'images')
+    images = [f for f in os.listdir(image_folder) if os.path.splitext(f)[1].lower() in IMAGE_EXTENSIONS]
     end = 0
     paginated_images = []
     while end < len(images):
@@ -29,5 +27,4 @@ def pagination(page):
 
 @app.route('/images/<filename>')
 def image(filename):
-    # return send_from_directory(os.path.join('static', 'images'), filename)
-    return send_from_directory(os.path.join('Z:\\', 'lucas-images'), filename)
+    return send_from_directory(os.path.join('static', 'images'), filename)
